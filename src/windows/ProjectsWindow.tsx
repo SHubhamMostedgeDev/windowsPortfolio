@@ -21,8 +21,8 @@ export default function ProjectsWindow() {
                 <button
                     onClick={() => setActiveTab('company')}
                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'company'
-                            ? 'bg-win-accent text-white'
-                            : 'bg-white/30 dark:bg-black/20 text-gray-700 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-black/30'
+                        ? 'bg-win-accent text-white'
+                        : 'bg-white/30 dark:bg-black/20 text-gray-700 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-black/30'
                         }`}
                 >
                     <FaBuilding />
@@ -31,8 +31,8 @@ export default function ProjectsWindow() {
                 <button
                     onClick={() => setActiveTab('personal')}
                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${activeTab === 'personal'
-                            ? 'bg-win-accent text-white'
-                            : 'bg-white/30 dark:bg-black/20 text-gray-700 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-black/30'
+                        ? 'bg-win-accent text-white'
+                        : 'bg-white/30 dark:bg-black/20 text-gray-700 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-black/30'
                         }`}
                 >
                     <FaUser />
@@ -52,9 +52,9 @@ export default function ProjectsWindow() {
                                 <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
                                     {project.name}
                                 </h3>
-                                {'github' in project && project.github && (
+                                {'github' in project && (project as any).github && (
                                     <a
-                                        href={project.github}
+                                        href={(project as any).github}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"

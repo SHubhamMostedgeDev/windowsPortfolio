@@ -3,6 +3,7 @@ import { IoMdSunny, IoMdMoon } from 'react-icons/io';
 import { FaCheck, FaAlignLeft, FaAlignCenter, FaDesktop, FaPalette, FaWindowMaximize, FaChevronRight, FaClock, FaInfoCircle, FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { BsGrid, BsListUl, BsDisplay, BsPersonCircle } from 'react-icons/bs';
 import { useTheme, wallpapers, TaskbarAlignment, displayScaleOptions, accentColors, ClockFormat } from '../context/ThemeContext';
+import { portfolioData } from '../data/portfolioData';
 
 type SettingsSection = 'system' | 'personalization' | 'taskbar' | 'time' | 'about';
 
@@ -318,7 +319,7 @@ export default function SettingsWindow() {
 
                             <div className="flex gap-3">
                                 <a
-                                    href="https://github.com/playkashyap"
+                                    href={portfolioData.personal.github}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition-colors"
@@ -327,7 +328,7 @@ export default function SettingsWindow() {
                                     <span className="text-sm">GitHub</span>
                                 </a>
                                 <a
-                                    href="https://linkedin.com/in/playkashyap"
+                                    href={portfolioData.personal.linkedin}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 px-4 py-2 rounded-lg text-white transition-colors"
@@ -337,7 +338,7 @@ export default function SettingsWindow() {
                                     <span className="text-sm">LinkedIn</span>
                                 </a>
                                 <a
-                                    href="mailto:contact@example.com"
+                                    href={`mailto:${portfolioData.personal.email}`}
                                     className="flex items-center gap-2 px-4 py-2 rounded-lg text-white transition-colors"
                                     style={{ backgroundColor: accentColor.color }}
                                 >

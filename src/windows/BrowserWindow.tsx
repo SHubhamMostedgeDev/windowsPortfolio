@@ -42,7 +42,7 @@ export default function BrowserWindow() {
         setHistoryIndex(newHistory.length - 1);
     }, [history, historyIndex]);
 
-    const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             navigateTo(inputUrl);
         }
@@ -125,7 +125,7 @@ export default function BrowserWindow() {
                         type="text"
                         value={inputUrl}
                         onChange={(e) => setInputUrl(e.target.value)}
-                        onKeyPress={handleKeyPress}
+                        onKeyDown={handleKeyDown}
                         className="flex-1 bg-transparent text-sm text-gray-800 dark:text-gray-200 outline-none"
                         placeholder="Search or enter URL"
                     />

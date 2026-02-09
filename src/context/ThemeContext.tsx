@@ -64,6 +64,8 @@ export type TaskbarAlignment = 'left' | 'center';
 export type TaskbarButtonStyle = 'icons' | 'icons-labels';
 export type DisplayScale = 100 | 125 | 150 | 175;
 export type ClockFormat = '12h' | '24h';
+export type IconSize = 'large' | 'medium' | 'small';
+export type IconSortOrder = 'default' | 'name-asc' | 'name-desc';
 
 export const displayScaleOptions: DisplayScale[] = [100, 125, 150, 175];
 
@@ -82,6 +84,10 @@ interface ThemeContextType {
     setAccentColor: (id: string) => void;
     clockFormat: ClockFormat;
     setClockFormat: (format: ClockFormat) => void;
+    iconSize: IconSize;
+    setIconSize: (size: IconSize) => void;
+    iconSortOrder: IconSortOrder;
+    setIconSortOrder: (order: IconSortOrder) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -122,6 +128,16 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         return (saved as ClockFormat) || '12h';
     });
 
+    const [iconSize, setIconSizeState] = useState<IconSize>(() => {
+        const saved = localStorage.getItem('iconSize');
+        return (saved as IconSize) || 'large';
+    });
+
+    const [iconSortOrder, setIconSortOrderState] = useState<IconSortOrder>(() => {
+        const saved = localStorage.getItem('iconSortOrder');
+        return (saved as IconSortOrder) || 'default';
+    });
+
     useEffect(() => {
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         if (isDark) {
@@ -158,6 +174,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         localStorage.setItem('clockFormat', clockFormat);
     }, [clockFormat]);
 
+    useEffect(() => {
+        localStorage.setItem('iconSize', iconSize);
+    }, [iconSize]);
+
+    useEffect(() => {
+        localStorage.setItem('iconSortOrder', iconSortOrder);
+    }, [iconSortOrder]);
+
     const toggleTheme = () => setIsDark(prev => !prev);
 
     const setWallpaper = (id: string) => {
@@ -186,6 +210,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         setClockFormatState(format);
     };
 
+    const setIconSize = (size: IconSize) => {
+        setIconSizeState(size);
+    };
+
+    const setIconSortOrder = (order: IconSortOrder) => {
+        setIconSortOrderState(order);
+    };
+
     return (
         <ThemeContext.Provider value={{
             isDark,
@@ -202,6 +234,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
             setAccentColor,
             clockFormat,
             setClockFormat,
+            iconSize,
+            setIconSize,
+            iconSortOrder,
+            setIconSortOrder,
         }}>
             {children}
         </ThemeContext.Provider>

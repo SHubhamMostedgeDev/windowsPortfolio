@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 
-export type WindowType = 'about' | 'experience' | 'projects' | 'skills' | 'education' | 'contact' | 'settings' | 'minesweeper' | 'browser';
+export type WindowType = 'about' | 'experience' | 'projects' | 'skills' | 'education' | 'contact' | 'settings' | 'minesweeper' | 'browser' | 'calculator' | 'notepad' | 'todolist' | 'musicplayer';
 
 export interface WindowState {
     id: WindowType;
@@ -35,6 +35,10 @@ const windowDefaults: Record<WindowType, { title: string; size: { width: number;
     settings: { title: 'Settings', size: { width: 850, height: 550 } },
     minesweeper: { title: 'Minesweeper', size: { width: 400, height: 500 } },
     browser: { title: 'Edge Browser', size: { width: 900, height: 600 } },
+    calculator: { title: 'Calculator', size: { width: 320, height: 500 } },
+    notepad: { title: 'Notepad', size: { width: 650, height: 500 } },
+    todolist: { title: 'Todo List', size: { width: 500, height: 550 } },
+    musicplayer: { title: 'Music Player', size: { width: 800, height: 550 } },
 };
 
 const WindowContext = createContext<WindowContextType | undefined>(undefined);

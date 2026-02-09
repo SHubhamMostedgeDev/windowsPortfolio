@@ -8,6 +8,7 @@ interface WindowProps {
     title: string;
     children: ReactNode;
     isMaximized: boolean;
+    isMinimized: boolean;
     zIndex: number;
     position: { x: number; y: number };
     size: { width: number; height: number };
@@ -20,6 +21,7 @@ export default function Window({
     title,
     children,
     isMaximized,
+    isMinimized,
     zIndex,
     position,
     size,
@@ -116,7 +118,7 @@ export default function Window({
         return (
             <div
                 className="fixed inset-0 glass window-shadow window-enter flex flex-col pointer-events-auto rounded-none"
-                style={{ zIndex, top: 0, bottom: 48 }}
+                style={{ zIndex, top: 0, bottom: 48, display: isMinimized ? 'none' : undefined }}
                 onMouseDown={handleMouseDown}
             >
                 {/* Title Bar */}
@@ -169,6 +171,7 @@ export default function Window({
                     height: size.height,
                     minWidth: 300,
                     minHeight: 200,
+                    display: isMinimized ? 'none' : undefined,
                 }}
                 onMouseDown={handleMouseDown}
             >

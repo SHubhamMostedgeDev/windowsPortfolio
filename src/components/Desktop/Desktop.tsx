@@ -1,10 +1,11 @@
-import { useState, useEffect, useCallback } from 'react';
-import { FaUser, FaBriefcase, FaCode, FaTools, FaGraduationCap, FaEnvelope, FaCog, FaBomb, FaGlobe } from 'react-icons/fa';
-import { useTheme } from '../../context/ThemeContext';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { FaUser, FaBriefcase, FaCode, FaTools, FaGraduationCap, FaEnvelope, FaCog, FaBomb, FaGlobe, FaListAlt, FaMusic } from 'react-icons/fa';
+import { useTheme, IconSize } from '../../context/ThemeContext';
 import { useWindows, WindowType } from '../../context/WindowContext';
 import DesktopIcon from '../DesktopIcon/DesktopIcon';
 import Taskbar from '../Taskbar/Taskbar';
 import Window from '../Window/Window';
+import ContextMenu from '../ContextMenu/ContextMenu';
 import AboutWindow from '../../windows/AboutWindow';
 import ExperienceWindow from '../../windows/ExperienceWindow';
 import ProjectsWindow from '../../windows/ProjectsWindow';
@@ -14,6 +15,10 @@ import ContactWindow from '../../windows/ContactWindow';
 import SettingsWindow from '../../windows/SettingsWindow';
 import MinesweeperWindow from '../../windows/MinesweeperWindow';
 import BrowserWindow from '../../windows/BrowserWindow';
+import CalculatorWindow from '../../windows/CalculatorWindow';
+import NotepadWindow from '../../windows/NotepadWindow';
+import TodoListWindow from '../../windows/TodoListWindow';
+import MusicPlayerWindow from '../../windows/MusicPlayerWindow';
 
 const desktopIcons: { id: WindowType; icon: React.ReactNode; label: string }[] = [
     { id: 'browser', icon: <FaGlobe />, label: 'Edge' },
@@ -25,6 +30,8 @@ const desktopIcons: { id: WindowType; icon: React.ReactNode; label: string }[] =
     { id: 'contact', icon: <FaEnvelope />, label: 'Contact' },
     { id: 'settings', icon: <FaCog />, label: 'Settings' },
     { id: 'minesweeper', icon: <FaBomb />, label: 'Minesweeper' },
+    { id: 'todolist', icon: <FaListAlt />, label: 'Todo List' },
+    { id: 'musicplayer', icon: <FaMusic />, label: 'Music' },
 ];
 
 const windowComponents: Record<WindowType, React.ReactNode> = {
@@ -37,16 +44,36 @@ const windowComponents: Record<WindowType, React.ReactNode> = {
     settings: <SettingsWindow />,
     minesweeper: <MinesweeperWindow />,
     browser: <BrowserWindow />,
+    calculator: <CalculatorWindow />,
+    notepad: <NotepadWindow />,
+    todolist: <TodoListWindow />,
+    musicplayer: <MusicPlayerWindow />,
 };
 
-const ICON_SIZE = 90;
-const ICON_GAP = 10;
-const GRID_SIZE = ICON_SIZE + ICON_GAP;
+const ICON_GRID_SIZES: Record<IconSize, { size: number; gap: number }> = {
+    large: { size: 90, gap: 10 },
+    medium: { size: 72, gap: 10 },
+    small: { size: 56, gap: 10 },
+};
 
 export default function Desktop() {
-    const { currentWallpaper } = useTheme();
+    const { currentWallpaper, iconSize, iconSortOrder } = useTheme();
     const { windows } = useWindows();
     const [windowSize, setWindowSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+    const [contextMenu, setContextMenu] = useState<{ x: number; y: number; isOpen: boolean }>({ x: 0, y: 0, isOpen: false });
+
+    const gridConfig = ICON_GRID_SIZES[iconSize];
+    const gridStep = gridConfig.size + gridConfig.gap;
+
+    const sortedIcons = useMemo(() => {
+        if (iconSortOrder === 'name-asc') {
+            return [...desktopIcons].sort((a, b) => a.label.localeCompare(b.label));
+        }
+        if (iconSortOrder === 'name-desc') {
+            return [...desktopIcons].sort((a, b) => b.label.localeCompare(a.label));
+        }
+        return desktopIcons;
+    }, [iconSortOrder]);
 
     // Handle window resize
     useEffect(() => {
@@ -62,27 +89,40 @@ export default function Desktop() {
     const getIconPosition = useCallback((index: number) => {
         // Available height for icons (subtract taskbar height and padding)
         const availableHeight = windowSize.height - 48 - 32; // 48px taskbar, 32px padding
-        const iconsPerColumn = Math.max(1, Math.floor(availableHeight / GRID_SIZE));
+        const iconsPerColumn = Math.max(1, Math.floor(availableHeight / gridStep));
 
         const col = Math.floor(index / iconsPerColumn);
         const row = index % iconsPerColumn;
 
         return {
-            x: col * GRID_SIZE,
-            y: row * GRID_SIZE
+            x: col * gridStep,
+            y: row * gridStep
         };
-    }, [windowSize.height]);
+    }, [windowSize.height, gridStep]);
+
+    const handleContextMenu = (e: React.MouseEvent) => {
+        e.preventDefault();
+        setContextMenu({ x: e.clientX, y: e.clientY, isOpen: true });
+    };
+
+    const handleClick = () => {
+        if (contextMenu.isOpen) {
+            setContextMenu({ ...contextMenu, isOpen: false });
+        }
+    };
 
     return (
         <div
             className="w-full h-full relative overflow-hidden transition-all duration-500"
             style={{ background: currentWallpaper.gradient }}
+            onContextMenu={handleContextMenu}
+            onClick={handleClick}
         >
             {/* Desktop Icons Container */}
             <div className="absolute top-4 left-4 right-4 bottom-16 z-10">
-                {desktopIcons.map((icon, index) => (
+                {sortedIcons.map((icon, index) => (
                     <DesktopIcon
-                        key={`${icon.id}-${windowSize.width}-${windowSize.height}`}
+                        key={`${icon.id}-${windowSize.width}-${windowSize.height}-${iconSize}-${iconSortOrder}`}
                         id={icon.id}
                         icon={icon.icon}
                         label={icon.label}
@@ -94,21 +134,29 @@ export default function Desktop() {
             {/* Windows */}
             <div className="absolute inset-0 mb-12 pointer-events-none">
                 {windows.map(window => (
-                    !window.isMinimized && (
-                        <Window
-                            key={window.id}
-                            id={window.id}
-                            title={window.title}
-                            isMaximized={window.isMaximized}
-                            zIndex={window.zIndex}
-                            position={window.position}
-                            size={window.size}
-                        >
-                            {windowComponents[window.id]}
-                        </Window>
-                    )
+                    <Window
+                        key={window.id}
+                        id={window.id}
+                        title={window.title}
+                        isMaximized={window.isMaximized}
+                        isMinimized={window.isMinimized}
+                        zIndex={window.zIndex}
+                        position={window.position}
+                        size={window.size}
+                    >
+                        {windowComponents[window.id]}
+                    </Window>
                 ))}
             </div>
+
+            {/* Context Menu */}
+            {contextMenu.isOpen && (
+                <ContextMenu
+                    x={contextMenu.x}
+                    y={contextMenu.y}
+                    onClose={() => setContextMenu({ ...contextMenu, isOpen: false })}
+                />
+            )}
 
             {/* Taskbar */}
             <Taskbar />

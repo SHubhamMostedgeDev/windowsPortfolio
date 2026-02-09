@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BsWindows } from 'react-icons/bs';
 import { IoMdSunny, IoMdMoon } from 'react-icons/io';
-import { FaUser, FaBriefcase, FaCode, FaTools, FaGraduationCap, FaEnvelope, FaCog, FaBomb, FaGlobe, FaWifi, FaVolumeUp } from 'react-icons/fa';
+import { FaUser, FaBriefcase, FaCode, FaTools, FaGraduationCap, FaEnvelope, FaCog, FaBomb, FaGlobe, FaWifi, FaVolumeUp, FaCalculator, FaStickyNote, FaList, FaPlay } from 'react-icons/fa';
 import { useWindows, WindowType } from '../../context/WindowContext';
 import { useTheme } from '../../context/ThemeContext';
 import StartMenu from '../StartMenu/StartMenu';
@@ -17,6 +17,10 @@ const windowIcons: Record<WindowType, React.ReactNode> = {
     settings: <FaCog className="text-base" />,
     minesweeper: <FaBomb className="text-base" />,
     browser: <FaGlobe className="text-base" />,
+    calculator: <FaCalculator className="text-base" />,
+    notepad: <FaStickyNote className="text-base" />,
+    todolist: <FaList className="text-base" />,
+    musicplayer: <FaPlay className="text-base" />,
 };
 
 export default function Taskbar() {
@@ -64,6 +68,7 @@ export default function Taskbar() {
                 <div className="flex items-center gap-0.5 px-1">
                     {/* Start Button */}
                     <button
+                        data-start-button
                         onClick={() => setIsStartMenuOpen(!isStartMenuOpen)}
                         className={`w-12 h-10 flex items-center justify-center transition-all rounded ${isStartMenuOpen
                             ? 'bg-black/5 dark:bg-white/10'

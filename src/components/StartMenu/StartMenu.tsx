@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { FaUser, FaBriefcase, FaCode, FaTools, FaGraduationCap, FaEnvelope, FaCog, FaBomb, FaGlobe } from 'react-icons/fa';
+import { FaUser, FaBriefcase, FaCode, FaTools, FaGraduationCap, FaEnvelope, FaCog, FaBomb, FaGlobe, FaCalculator, FaStickyNote, FaListAlt, FaMusic } from 'react-icons/fa';
 import { useWindows, WindowType } from '../../context/WindowContext';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -9,14 +9,18 @@ interface StartMenuProps {
 
 const pinnedApps: { id: WindowType; icon: React.ReactNode; label: string }[] = [
     { id: 'browser', icon: <FaGlobe />, label: 'Edge' },
+    { id: 'calculator', icon: <FaCalculator />, label: 'Calculator' },
+    { id: 'notepad', icon: <FaStickyNote />, label: 'Notepad' },
+    { id: 'settings', icon: <FaCog />, label: 'Settings' },
+    { id: 'minesweeper', icon: <FaBomb />, label: 'Minesweeper' },
+    { id: 'todolist', icon: <FaListAlt />, label: 'Todo List' },
+    { id: 'musicplayer', icon: <FaMusic />, label: 'Music' },
+    { id: 'projects', icon: <FaCode />, label: 'Projects' },
     { id: 'about', icon: <FaUser />, label: 'About Me' },
     { id: 'experience', icon: <FaBriefcase />, label: 'Experience' },
-    { id: 'projects', icon: <FaCode />, label: 'Projects' },
     { id: 'skills', icon: <FaTools />, label: 'Skills' },
     { id: 'education', icon: <FaGraduationCap />, label: 'Education' },
     { id: 'contact', icon: <FaEnvelope />, label: 'Contact' },
-    { id: 'settings', icon: <FaCog />, label: 'Settings' },
-    { id: 'minesweeper', icon: <FaBomb />, label: 'Minesweeper' },
 ];
 
 export default function StartMenu({ onClose }: StartMenuProps) {
@@ -29,7 +33,7 @@ export default function StartMenu({ onClose }: StartMenuProps) {
             if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
                 // Check if click is on taskbar start button
                 const target = event.target as HTMLElement;
-                if (!target.closest('.win-btn')) {
+                if (!target.closest('[data-start-button]')) {
                     onClose();
                 }
             }
