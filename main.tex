@@ -1,0 +1,212 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge \scshape Shubham Kumar Prajapati} \\ \vspace{1pt}
+    \small +91 7080364716 $|$ \href{mailto:jackwill021@gmail.com}{\underline{jackwill021@gmail.com}} $|$ 
+    \href{https://www.linkedin.com/in/shubham7080/}{\underline{linkedin.com/in/shubham7080}} $|$
+    \href{https://github.com/playkashyap}{\underline{github.com/playkashyap}}
+\end{center}
+
+
+
+
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+      \resumeSubheading
+      {Fullstack Developer}{July. 2025 -- Present}
+      {Mostedge}{Vadodra, India}
+      \resumeItemListStart
+        \resumeItem{Building Surveillance application for Keeping Eye on C Stores remotely. With face recognition and logging with GPU acceleration}
+        \resumeItem{Developed RESTful APIs with Node.js (TypeScript), python with MSSQL and PostgreSQL. }
+        \resumeItem{Actively participating in hosting the Backend with GPU cloud instances.}
+        \resumeItem{Used CUDA and Other GPU technologies to speedup the model processing speed with Video encoding and decoding.}
+    \resumeItemListEnd
+
+    \resumeSubheading
+      {Software Developer (Frontend and Backend)}{Jun. 2023 -- May. 2025}
+      {Cosmotech AI}{Noida, India}
+      \resumeItemListStart
+        \resumeItem{Built responsive UIs using React, Angular, Next.js, HTML, CSS, and TypeScript.}
+        \resumeItem{ Developed RESTful APIs with Node.js (TypeScript) and MongoDB for real-time data operations. }
+        \resumeItem{Integrated APIs to enhance interactivity and dynamic content.}
+        \resumeItem{Used Git for version control; participated in agile ceremonies including sprint planning and daily standups.}
+    \resumeItemListEnd
+
+    \resumeSubheading
+      {Frontend Developer Intern}{Jan. 2023 -- Jun. 2023}
+      {Cosmotech AI}{Noida, India}
+      \resumeItemListStart
+        \resumeItem{ Contributed to UI development using React, Angular, HTML, CSS, and TypeScript.}
+        \resumeItem{Assisted in API integration and dynamic content updates.}
+        \resumeItem{Participated in agile processes and collaborated using Git for version control.}
+        \resumeItem{Participated in daily stand-ups and team meetings, actively engaging in sprint planning with project goals and timelines.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+% -----company projects -------
+
+
+\section{Projects with Company}
+\resumeSubHeadingListStart
+  \resumeProjectHeading
+    {\textbf{HRIS - Front-end} $|$ \emph{Next.js, React, Tailwind, Zustand, Context API, Typescript}}{Aug. 2024 -- May. 2025}
+    \resumeItemListStart
+      \resumeItem{Developed a pixel-perfect, responsive UI with a custom sidebar using Tailwind and reusable React components.}
+      \resumeItem{Built a dynamic drag-and-drop dashboard for customizable user workflows and widget arrangements.}
+      \resumeItem{Managed global state efficiently using Zustand and Context API across multiple modules.}
+      \resumeItem{Created custom dynamic organizational chart which can be exported to a pdf.}
+    \resumeItemListEnd
+
+     \resumeProjectHeading
+    {\textbf{PMS - Front-end} $|$ \emph{Angular, RxJs, Bootstrap, Apex Charts, Ngrx, Typescript}}{July. 2023 -- May. 2025}
+         \resumeProjectHeading
+    {\textbf{Rate System - Front-end} $|$ \emph{React, Vite, Bootstrap, Apex Charts, Context API, Javascript}}{Jan. 2023 -- May. 2025}
+    
+\resumeSubHeadingListEnd
+
+
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+        \resumeProjectHeading
+          {\textbf{HandFlow} $|$ \emph{Python, OpenCV, Mediapipe, CNN, TensorFlow, NumPy }}{Aug. 2022 -- Apr. 2023}
+          \resumeItemListStart
+          \resumeItem{A proposed Framework for Controlling Basic Computer Functionalities with Hand Gesture}
+          \resumeItem{Created a real-time video program with 96\% accuracy for static gestures and 97\% accuracy for dynamic gestures, employing a robust process encompassing data collection, model training, and real-time implementation.}
+          \resumeItem{Executed diverse computer functions based on recognized gestures, including actions like zooming, saving, and minimizing open windows.}
+
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{Image Processing based Brain Tumor Detection} $|$ \emph{Python, SVM}}{Aug. 2021 -- Jan. 2022}
+          \resumeItemListStart
+            \resumeItem {Applied advanced algorithms, including pre-processing, segmentation, and SVM classification, to enhance accuracy in brain tumor detection}
+            \resumeItem{Published a paper titled "Image Processing based Brain Tumor Detection" at ICFIRTP-2022.}
+          \resumeItemListEnd
+    \resumeSubHeadingListEnd
+
+
+%
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: JavaScript, HTML/CSS, Typescript, MongoDB, GraphQL, SQL(beginer)} \\
+     \textbf{Frameworks}{: ReactJs, Node.js, Express.js, Tailwind,  Bootstrap, Material-UI, Angular, NextJs} \\
+     \textbf{Developer Tools}{: Git, Git Version control, VS Code, MongoDB Atlas, Postman, MongoDB Compass, MS Azure} \\
+     \textbf{Libraries}{: MUI, Rxjs, Axios, Body Parser, bCrypt, JWT, Moment, Angular Material, ThreeJs, ShadCn UI, Tenstack}
+    }}
+ \end{itemize}
+
+ %-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Sharda University}{Gr Noida, India}
+      {Bachelor of Computer Science and Technology}{Aug. 2019 -- Aug. 2023}
+  \resumeSubHeadingListEnd
+    \resumeSubHeadingListStart
+    \resumeSubheading
+      {Columbus International School}{Ballia, India}
+      {Higher Secondry, {81\%}}{Mar. 2016 -- Apr. 2018}
+  \resumeSubHeadingListEnd
+    \resumeSubHeadingListStart
+    \resumeSubheading
+      {Columbus International School}{Ballia, India}
+      {Secondry ,{10 CGPA}}{Mar. 2014 -- Mar. 2016}
+  \resumeSubHeadingListEnd
+
+
+%-------------------------------------------
+\end{document}
